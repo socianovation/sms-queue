@@ -1,21 +1,18 @@
-# Lumen PHP Framework
+# E-Mail Queue
+Sending Sms with PHP Lumen and RabbitMQ 
+Powered by Twilio
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
-
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
-
-## Official Documentation
-
-Documentation for the framework can be found on the [Lumen website](http://lumen.laravel.com/docs).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Lumen framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+### How to use
+1. Install RabbitMQ in your environment
+Follow this guide : https://www.digitalocean.com/community/tutorials/how-to-install-and-manage-rabbitmq
+2. After installing RabbitMQ, start the rabbitmq service, navigate to http://[your server ip]:15672
+3. Login with your credential (by default guest:guest)
+4. Create a new queue (In the example, i set the queue name as 'send-sms') and make sure you set "durable" option to true. 
+5. Clone this repo
+6. Run ```composer install ```
+7. Change the .env content (TWILIO_SID, TWILIO_TOKEN and TWILIO_PHONE_NUMBER) with your twilio account
+8. For the queue listener, run ```php artisan sms:listener ```
+9. Run ```php -S localhost:8000 -t public```
+10. Try run http://localhost:8000/send-sms?
+phone_number=<your_verified_phone_number>
+11. Done!! Your sms will be sent
